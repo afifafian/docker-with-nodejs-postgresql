@@ -1,5 +1,3 @@
-const converter = require("../../../helpers/currencyConverter");
-
 class CarResponse{
     constructor(data = {}){
         if(Object.keys(this).length > 0){
@@ -26,7 +24,7 @@ class CarResponse{
         this.carBrand = data.car_brand;
         this.carColor = data.car_color;
         this.production_year = data.production_year;
-        this.price = converter(data.price);
+        this.price = data.price;
         this.stock = data.stock;
         this.carCreated = data.created_at;
         this.carUpdated = data.updated_at;

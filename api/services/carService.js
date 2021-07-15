@@ -1,7 +1,6 @@
 const { Car } = require("../config/db/sequelize");
 const FormCar = require("../dto/request/formCar");
 const getCurrentDate = require("../helpers/currentDate");
-const converter = require("../helpers/currencyConverter");
 const _ = require("lodash");
 
 class CarServices {
@@ -68,7 +67,7 @@ class CarServices {
         carBrand: createNewCar.car_brand,
         carColor: createNewCar.car_color,
         productionYear: createNewCar.production_year,
-        price: converter(createNewCar.price),
+        price: createNewCar.price,
         stock: createNewCar.stock
       };
 
