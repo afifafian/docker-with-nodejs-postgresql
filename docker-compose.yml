@@ -1,0 +1,21 @@
+version: '3'
+services:
+  api:
+    image: api-car-dealer-project
+    build: .
+    networks:
+      - backend
+    ports:
+      - "5052:3005"
+    volumes:
+      - ./:/usr/src/api-car-dealer-project
+
+  postgres:
+    image: postgres:11.2-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DATABASE: backend-test
+networks:
+  backend:
+    driver: bridge
