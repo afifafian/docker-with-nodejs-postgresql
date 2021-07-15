@@ -1,21 +1,31 @@
 version: '3'
 services:
   api:
-    image: api-car-dealer-project
     build: .
-    networks:
-      - backend
     ports:
-      - "5052:3005"
-    volumes:
-      - ./:/usr/src/api-car-dealer-project
-
-  postgres:
-    image: postgres:11.2-alpine
+      - "3005:3005"
+    networks: 
+      - backend
+    depends_on:
+      - postgres
     environment:
-      POSTGRES_PASSWORD: postgres
+      DB_PWD: postgres
+      DB_USER: postgres
+      DB_NAME: backend-test
+      DB_HOST: localhost
+  postgres:
+    image: postgres
+    volumes:
+      - cdp-db:/usr/src/db
+    restart: always
+    ports:
+      - "5432:5432"
+    networks: 
+      - backend
+    environment:
       POSTGRES_USER: postgres
-      POSTGRES_DATABASE: backend-test
-networks:
+      POSTGRES_PASSWORD: postgres
+networks: 
   backend:
-    driver: bridge
+volumes:
+  cdp-db:
